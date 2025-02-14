@@ -1,24 +1,33 @@
+import { useEffect } from "react";
 import { Comentario } from "./Comentario";
+import { useState } from "react";
 export function App() {
-    traerDatos();
-    async function traerDatos() {
-        const data = await fetch("data.json").then((response) =>
-            response.json(),
-        );
-        const { comments, currentUser } = data;
-        console.log(comments, currentUser);
-        comments.forEach((e) => {
-            console.log(e.id, e.content, e.createdAt, e.user);
-        });
-    }
-
-    const { img, nombre, fecha, texto } = 0;
+    const [comentarios, setComentarios] = useState([]);
+    console.log(comentarios.length);
+    useEffect(() => {
+        async function traerDatos() {
+            const data = await fetch("data.json").then((response) =>
+                response.json(),
+            );
+            setComentarios(data.comments);
+        }
+        traerDatos();
+    }, []);
     return (
         <section className="bg-very-light-gray">
-            <Comentario png={img} name={nombre} date={fecha} text={texto} />
-            <Comentario png={img} name={nombre} date={fecha} text={texto} />
-            <Comentario png={img} name={nombre} date={fecha} text={texto} />
-            <Comentario png={img} name={nombre} date={fecha} text={texto} />
+            {comentarios.length > 0 ? (
+                comentarios.map((comentario) => (
+                    <Comentario
+                        key={comentario.id}
+                        img={comentario.user.image.webp}
+                        name={comentario.user.username}
+                        date={comentario.createdAt}
+                        text={comentario.content}
+                    />
+                ))
+            ) : (
+                <p>No hay comentarios Disponibles</p>
+            )}
         </section>
     );
 }
