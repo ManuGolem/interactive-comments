@@ -37,11 +37,10 @@ export function App() {
                                             img={respuesta.user.image.webp}
                                             name={respuesta.user.username}
                                             date={respuesta.createdAt}
-                                            text={"@".concat(
-                                                respuesta.replyingTo.concat(
-                                                    respuesta.content,
-                                                ),
+                                            responseTo={"@".concat(
+                                                respuesta.replyingTo,
                                             )}
+                                            text={respuesta.content}
                                             tipo="Respuesta"
                                         />
                                     ))}
