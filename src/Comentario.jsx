@@ -1,7 +1,14 @@
 import { BotonPuntuacion } from "./BotonPuntacion";
-export function Comentario({ img, name, date, text }) {
+export function Comentario({ img, name, date, text, tipo }) {
+    let clases;
+    if (tipo == "Comentario") {
+        clases =
+            "flex w-[50%] bg-white mb-1 ml-auto mr-auto p-5 gap-5 rounded-[8px] mt-8";
+    } else {
+        clases = "flex bg-white p-5 gap-5 rounded-[8px]";
+    }
     return (
-        <div className="flex w-[50%] bg-white mb-1 ml-auto mr-auto p-5 gap-5 rounded-[8px] mt-8">
+        <div className={clases}>
             <BotonPuntuacion score="12" />
             <div>
                 <header className="flex gap-4 items-center mb-5">
