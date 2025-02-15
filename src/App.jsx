@@ -9,7 +9,7 @@ export function App() {
                 response.json(),
             );
             setComentarios(data.comments);
-            console.log(data.comments[1].replies);
+            console.log(data);
         }
         traerDatos();
     }, []);
@@ -28,6 +28,7 @@ export function App() {
                                 date={comentario.createdAt}
                                 text={comentario.content}
                                 tipo="Comentario"
+                                score={comentario.score}
                             />
                             <div className="respuesta">
                                 <div className="respuesta-sep">
@@ -42,6 +43,7 @@ export function App() {
                                             )}
                                             text={respuesta.content}
                                             tipo="Respuesta"
+                                            score={respuesta.score}
                                         />
                                     ))}
                                 </div>
@@ -55,6 +57,7 @@ export function App() {
                             date={comentario.createdAt}
                             text={comentario.content}
                             tipo="Comentario"
+                            score={comentario.score}
                         />
                     ),
                 )
