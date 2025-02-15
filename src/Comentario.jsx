@@ -8,7 +8,11 @@ export function Comentario({ img, name, date, text, tipo, responseTo, score }) {
                     <img src={img} className="w-[32px]"></img>
                     <h2 className="font-bold">{name}</h2>
                     <p className="text-grayish-blue">{date}</p>
-                    <button className="ml-auto hover:cursor-pointer">
+                    <button className="ml-auto hover:cursor-pointer flex gap-1 items-center text-moderate-blue font-bold">
+                        <img
+                            className="w-[14px] h-[13px]"
+                            src="images/icon-reply.svg"
+                        />
                         Reply
                     </button>
                 </header>
@@ -23,7 +27,11 @@ export function Comentario({ img, name, date, text, tipo, responseTo, score }) {
                     <img src={img} className="w-[32px]"></img>
                     <h2 className="font-bold">{name}</h2>
                     <p className="text-grayish-blue">{date}</p>
-                    <button className="ml-auto hover:cursor-pointer">
+                    <button className="ml-auto hover:cursor-pointer flex gap-1 items-center text-moderate-blue font-bold">
+                        <img
+                            className="w-[14px] h-[13px]"
+                            src="images/icon-reply.svg"
+                        />
                         Reply
                     </button>
                 </header>
