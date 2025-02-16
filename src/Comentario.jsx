@@ -1,5 +1,14 @@
 import { BotonPuntuacion } from "./BotonPuntacion";
-export function Comentario({ img, name, date, text, tipo, responseTo, score }) {
+export function Comentario({
+    img,
+    name,
+    date,
+    text,
+    tipo,
+    responseTo,
+    score,
+    currentUser,
+}) {
     return tipo === "Comentario" ? (
         <div className="flex w-[50%] bg-white mb-1 ml-auto mr-auto p-5 gap-5 rounded-[8px] mt-8">
             <BotonPuntuacion score={score} />
@@ -7,6 +16,12 @@ export function Comentario({ img, name, date, text, tipo, responseTo, score }) {
                 <header className="flex gap-4 items-center mb-5">
                     <img src={img} className="w-[32px]"></img>
                     <h2 className="font-bold">{name}</h2>
+                    {currentUser != null ? (
+                        currentUser == name ? (
+                            <p> you</p>
+                        ) : null
+                    ) : null}
+
                     <p className="text-grayish-blue">{date}</p>
                     <button className="ml-auto hover:cursor-pointer flex gap-1 items-center text-moderate-blue font-bold">
                         <img
@@ -26,6 +41,14 @@ export function Comentario({ img, name, date, text, tipo, responseTo, score }) {
                 <header className="flex gap-4 items-center mb-5">
                     <img src={img} className="w-[32px]"></img>
                     <h2 className="font-bold">{name}</h2>
+                    {currentUser != null ? (
+                        currentUser == name ? (
+                            <p className="bg-moderate-blue text-white px-2 ">
+                                {" "}
+                                you
+                            </p>
+                        ) : null
+                    ) : null}
                     <p className="text-grayish-blue">{date}</p>
                     <button className="ml-auto hover:cursor-pointer flex gap-1 items-center text-moderate-blue font-bold">
                         <img
