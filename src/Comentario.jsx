@@ -10,7 +10,7 @@ export function Comentario({
     currentUser,
 }) {
     return tipo === "Comentario" ? (
-        <div className="flex w-[50%] bg-white mb-1 ml-auto mr-auto p-5 gap-5 rounded-[8px] mt-8">
+        <div className="flex w-[50%] bg-white mb-1 ml-auto mr-auto p-5 gap-5 rounded-[8px]">
             <BotonPuntuacion score={score} />
             <div>
                 <header className="flex gap-4 items-center mb-5">
@@ -18,7 +18,10 @@ export function Comentario({
                     <h2 className="font-bold">{name}</h2>
                     {currentUser != null ? (
                         currentUser == name ? (
-                            <p> you</p>
+                            <p className="bg-moderate-blue text-white px-2 ">
+                                {" "}
+                                you
+                            </p>
                         ) : null
                     ) : null}
 
