@@ -1,16 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Comentario } from "./Comentario";
-import { useState } from "react";
+import { Comentar } from "./Comentar";
 export function App() {
     const [comentarios, setComentarios] = useState([]);
+    const [user, setUser] = useState(null);
+    async function traerDatos() {
+        const data = await fetch("data.json").then((response) =>
+            response.json(),
+        );
+        setComentarios(data.comments);
+        setUser(data.currentUser);
+        console.log(data);
+    }
     useEffect(() => {
-        async function traerDatos() {
-            const data = await fetch("data.json").then((response) =>
-                response.json(),
-            );
-            setComentarios(data.comments);
-            console.log(data);
-        }
         traerDatos();
     }, []);
     return (
@@ -63,6 +65,11 @@ export function App() {
                 )
             ) : (
                 <p>No hay comentarios Disponibles</p>
+            )}
+            {user ? (
+                <Comentar img={user.image.webp} name={user.username} />
+            ) : (
+                <p> No hay user aun</p>
             )}
         </section>
     );
