@@ -31,6 +31,7 @@ export function App() {
                                 text={comentario.content}
                                 tipo="Comentario"
                                 score={comentario.score}
+                                currentUser={user ? user.username : null}
                             />
                             <div className="respuesta">
                                 <div className="respuesta-sep">
@@ -46,6 +47,9 @@ export function App() {
                                             text={respuesta.content}
                                             tipo="Respuesta"
                                             score={respuesta.score}
+                                            currentUser={
+                                                user ? user.username : null
+                                            }
                                         />
                                     ))}
                                 </div>
@@ -60,6 +64,7 @@ export function App() {
                             text={comentario.content}
                             tipo="Comentario"
                             score={comentario.score}
+                            currentUser={user ? user.username : null}
                         />
                     ),
                 )
