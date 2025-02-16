@@ -4,19 +4,31 @@ import { Comentar } from "./Comentar";
 export function App() {
     const [comentarios, setComentarios] = useState([]);
     const [user, setUser] = useState(null);
+    const [id, setId] = useState(5);
     async function traerDatos() {
         const data = await fetch("data.json").then((response) =>
             response.json(),
         );
         setComentarios(data.comments);
         setUser(data.currentUser);
-        console.log(data);
     }
     useEffect(() => {
         traerDatos();
     }, []);
+    function comentar(value) {
+        const nuevoComentario = {
+            id: id,
+            content: value,
+            createdAt: "Recently",
+            user: user,
+            replies: [],
+            score: 0,
+        };
+        setId(id + 1);
+        setComentarios([...comentarios, nuevoComentario]);
+    }
     return (
-        <section>
+        <section className="mt-12 flex flex-col gap-2">
             {comentarios.length > 0 ? (
                 comentarios.map((comentario) =>
                     comentario.replies.length > 0 ? (
@@ -72,7 +84,11 @@ export function App() {
                 <p>No hay comentarios Disponibles</p>
             )}
             {user ? (
-                <Comentar img={user.image.webp} name={user.username} />
+                <Comentar
+                    funcion={comentar}
+                    img={user.image.webp}
+                    name={user.username}
+                />
             ) : (
                 <p> No hay user aun</p>
             )}
