@@ -1,0 +1,16 @@
+export function Comentar({ img, username }) {
+    return (
+        <article className="w-[50%] mr-auto ml-auto flex bg-white p-5 gap-5 rounded-[8px] items-start">
+            <header className="flex gap-4 items-center mb-5">
+                <img src={img} className="w-[40px]"></img>
+            </header>
+            <textarea
+                className="bg-white resize-none rounded-2xl w-full border-2 border-light-gray px-5 py-2 h-[6rem] focus-visible:outline-none"
+                placeholder="Add a comment..."
+            ></textarea>
+            <button className="bg-moderate-blue px-5 py-2 text-white rounded-[8px] hover:bg-light-grayish-blue hover:cursor-pointer">
+                SEND
+            </button>
+        </article>
+    );
+}
