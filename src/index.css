@@ -27,7 +27,7 @@
 .respuesta-sep{
     display:flex;
     flex-direction: column;
-    gap:20px;
+    gap:16px;
     padding-left:20px;
     margin-block:10px;
     box-shadow: -2px 0px 0px var(--color-light-gray);    
