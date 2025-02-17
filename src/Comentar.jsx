@@ -1,5 +1,5 @@
 import { useState } from "react";
-export function Comentar({ img, username, funcion, send }) {
+export function Comentar({ img, name, funcion, send }) {
     const [texto, setTexto] = useState("");
     function guardarTexto(e) {
         setTexto(e.target.value);
