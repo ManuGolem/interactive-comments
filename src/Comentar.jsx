@@ -9,7 +9,7 @@ export function Comentar({ img, username, funcion }) {
         setTexto("");
     }
     return (
-        <article className="w-[50%] mr-auto ml-auto flex bg-white p-5 gap-5 rounded-[8px] items-start">
+        <article className="flex bg-white p-5 gap-5 rounded-[8px] items-start">
             <header className="flex gap-4 items-center mb-5">
                 <img src={img} className="w-[40px]"></img>
             </header>
