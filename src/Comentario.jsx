@@ -7,12 +7,12 @@ export function Comentario({
     name,
     date,
     text,
-    tipo,
     responseTo,
     score,
     currentUser,
     id,
     responder,
+    borrarComentario,
 }) {
     const [respondiendo, setRespondiendo] = useState(false);
     function handleResponder() {
@@ -24,6 +24,9 @@ export function Comentario({
         }
         setRespondiendo(false);
     }
+    function borrar() {
+        borrarComentario(id);
+    }
     return (
         <>
             <div
@@ -33,6 +36,7 @@ export function Comentario({
                 <BotonPuntuacion score={score} />
                 <div className="w-full">
                     <HeaderComment
+                        llamarBorrar={borrar}
                         img={img}
                         name={name}
                         currentUser={currentUser ? currentUser.username : null}
