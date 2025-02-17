@@ -3,9 +3,12 @@ export function HeaderComment({
     date,
     name,
     currentUser,
-    id,
+    llamarBorrar,
     llamarFuncion,
 }) {
+    function borrar() {
+        llamarBorrar();
+    }
     function responder() {
         llamarFuncion();
     }
@@ -21,7 +24,10 @@ export function HeaderComment({
             <p className="text-grayish-blue text-start grow">{date}</p>
             {currentUser != null ? (
                 currentUser == name ? (
-                    <button className=" text-soft-red flex gap-1 items-center hover:cursor-pointer">
+                    <button
+                        onClick={borrar}
+                        className=" text-soft-red flex gap-1 items-center hover:cursor-pointer"
+                    >
                         <img src="images/icon-delete.svg" />
                         Delete
                     </button>
