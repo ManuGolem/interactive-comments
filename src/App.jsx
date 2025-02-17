@@ -43,10 +43,13 @@ export function App() {
                             name={comentario.user.username}
                             date={comentario.createdAt}
                             text={comentario.content}
-                            tipo="Comentario"
                             score={comentario.score}
                             currentUser={user ? user : null}
                             responder={responder}
+                            responseTo={
+                                comentario.replyingTo &&
+                                "@".concat(comentario.replyingTo)
+                            }
                         />
                         <div className="respuesta">
                             <div className="respuesta-sep">
@@ -59,10 +62,9 @@ export function App() {
                 );
             }
         }
-        let tipoComent = "Comentario";
+
         let responseTo;
         if (comentario.replyingTo) {
-            tipoComent = "Respuesta";
             responseTo = "@".concat(comentario.replyingTo);
         }
         return (
@@ -73,7 +75,6 @@ export function App() {
                 name={comentario.user.username}
                 date={comentario.createdAt}
                 text={comentario.content}
-                tipo={tipoComent}
                 responseTo={responseTo}
                 responder={responder}
                 score={comentario.score}

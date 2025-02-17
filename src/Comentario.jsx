@@ -24,34 +24,7 @@ export function Comentario({
         }
         setRespondiendo(false);
     }
-    return tipo === "Comentario" ? (
-        <div>
-            <div className="flex bg-white mb-1 p-5 gap-5 rounded-[8px]" id={id}>
-                <BotonPuntuacion score={score} />
-                <div className="w-full">
-                    <HeaderComment
-                        img={img}
-                        name={name}
-                        currentUser={currentUser ? currentUser.username : null}
-                        date={date}
-                        id={id}
-                        llamarFuncion={handleResponder}
-                    />
-                    <p className="text-grayish-blue text-start">{text}</p>
-                </div>
-            </div>
-            {respondiendo && (
-                <div className="w-[50%] mr-auto ml-auto">
-                    <Comentar
-                        funcion={enviar}
-                        img={currentUser.image.webp}
-                        name={currentUser.username}
-                        send={false}
-                    />
-                </div>
-            )}
-        </div>
-    ) : (
+    return (
         <>
             <div
                 className="w-full flex bg-white p-5 gap-5 rounded-[8px]"
