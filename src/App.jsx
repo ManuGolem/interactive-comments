@@ -38,6 +38,7 @@ export function App() {
                     >
                         <Comentario
                             key={comentario.id}
+                            borrarComentario={borrar}
                             id={comentario.id}
                             img={comentario.user.image.webp}
                             name={comentario.user.username}
@@ -71,6 +72,7 @@ export function App() {
             <Comentario
                 key={comentario.id}
                 id={comentario.id}
+                borrarComentario={borrar}
                 img={comentario.user.image.webp}
                 name={comentario.user.username}
                 date={comentario.createdAt}
@@ -84,10 +86,10 @@ export function App() {
     }
     function responder(value, idViejo) {
         const copiaComentarios = JSON.parse(JSON.stringify(comentarios));
-        buscarComentarioId(idViejo, copiaComentarios, value);
+        editarComentarioId(idViejo, copiaComentarios, value);
         setComentarios(copiaComentarios);
     }
-    function buscarComentarioId(idViejo, arreglo, value) {
+    function editarComentarioId(idViejo, arreglo, value) {
         if (Array.isArray(arreglo)) {
             for (const co of arreglo) {
                 if (co.id == idViejo) {
@@ -104,10 +106,10 @@ export function App() {
                     if (!co.replies) {
                         co.replies = [];
                     }
-                    return co.replies.push(nuevoComentario);
+                    co.replies.push(nuevoComentario);
                 } else if (co.replies) {
                     if (co.replies.length > 0) {
-                        buscarComentarioId(idViejo, co.replies, value);
+                        editarComentarioId(idViejo, co.replies, value);
                     }
                 }
             }
@@ -123,6 +125,25 @@ export function App() {
             };
             setId(id + 1);
             arreglo.replies.push(nuevoComentario);
+        }
+    }
+    function borrar(idABorrar) {
+        const copiaComentarios = JSON.parse(JSON.stringify(comentarios));
+        borrarComentarioId(idABorrar, copiaComentarios);
+        setComentarios(copiaComentarios);
+    }
+    function borrarComentarioId(idS, arreglo) {
+        if (Array.isArray(arreglo)) {
+            for (const co of arreglo) {
+                if (co.id == idS) {
+                    arreglo.splice(arreglo.indexOf(co), 1);
+                    break;
+                } else if (co.replies) {
+                    if (co.replies.length > 0) {
+                        borrarComentarioId(idS, co.replies);
+                    }
+                }
+            }
         }
     }
     return (
