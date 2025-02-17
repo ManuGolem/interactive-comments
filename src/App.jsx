@@ -27,47 +27,15 @@ export function App() {
         setId(id + 1);
         setComentarios([...comentarios, nuevoComentario]);
     }
-    return (
-        <section className="mt-12 flex flex-col gap-2">
-            {comentarios.length > 0 ? (
-                comentarios.map((comentario) =>
-                    comentario.replies.length > 0 ? (
-                        <div
-                            key={comentario.id}
-                            className="flex flex-col justify-center"
-                        >
-                            <Comentario
-                                img={comentario.user.image.webp}
-                                name={comentario.user.username}
-                                date={comentario.createdAt}
-                                text={comentario.content}
-                                tipo="Comentario"
-                                score={comentario.score}
-                                currentUser={user ? user.username : null}
-                            />
-                            <div className="respuesta">
-                                <div className="respuesta-sep">
-                                    {comentario.replies.map((respuesta) => (
-                                        <Comentario
-                                            key={respuesta.id}
-                                            img={respuesta.user.image.webp}
-                                            name={respuesta.user.username}
-                                            date={respuesta.createdAt}
-                                            responseTo={"@".concat(
-                                                respuesta.replyingTo,
-                                            )}
-                                            text={respuesta.content}
-                                            tipo="Respuesta"
-                                            score={respuesta.score}
-                                            currentUser={
-                                                user ? user.username : null
-                                            }
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    ) : (
+    function devolverArbol(comentario) {
+        //Funcion recursiva para recorrer todas las respuestas
+        if (comentario.replies) {
+            if (comentario.replies.length > 0) {
+                return (
+                    <div
+                        key={comentario.id}
+                        className="flex flex-col justify-center"
+                    >
                         <Comentario
                             key={comentario.id}
                             img={comentario.user.image.webp}
@@ -78,17 +46,53 @@ export function App() {
                             score={comentario.score}
                             currentUser={user ? user.username : null}
                         />
-                    ),
-                )
+                        <div className="respuesta">
+                            <div className="respuesta-sep">
+                                {comentario.replies.map((respuesta) =>
+                                    devolverArbol(respuesta),
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+        }
+        let tipoComent = "Comentario";
+        let responseTo;
+        if (comentario.replyingTo) {
+            tipoComent = "Respuesta";
+            responseTo = "@".concat(comentario.replyingTo);
+        }
+        console.log(comentario);
+        return (
+            <Comentario
+                key={comentario.id}
+                img={comentario.user.image.webp}
+                name={comentario.user.username}
+                date={comentario.createdAt}
+                text={comentario.content}
+                tipo={tipoComent}
+                responseTo={responseTo}
+                score={comentario.score}
+                currentUser={user ? user.username : null}
+            />
+        );
+    }
+    return (
+        <section className="mt-12 flex flex-col gap-2">
+            {comentarios.length > 0 ? (
+                comentarios.map((comentario) => devolverArbol(comentario))
             ) : (
                 <p>No hay comentarios Disponibles</p>
             )}
             {user ? (
-                <Comentar
-                    funcion={comentar}
-                    img={user.image.webp}
-                    name={user.username}
-                />
+                <div className="w-[50%] mr-auto ml-auto">
+                    <Comentar
+                        funcion={comentar}
+                        img={user.image.webp}
+                        name={user.username}
+                    />
+                </div>
             ) : (
                 <p> No hay user aun</p>
             )}
