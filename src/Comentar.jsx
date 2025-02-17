@@ -1,5 +1,5 @@
 import { useState } from "react";
-export function Comentar({ img, username, funcion }) {
+export function Comentar({ img, username, funcion, send }) {
     const [texto, setTexto] = useState("");
     function guardarTexto(e) {
         setTexto(e.target.value);
@@ -23,7 +23,7 @@ export function Comentar({ img, username, funcion }) {
                 onClick={enviar}
                 className="bg-moderate-blue px-5 py-2 text-white rounded-[8px] hover:bg-light-grayish-blue hover:cursor-pointer"
             >
-                SEND
+                {send ? "SEND" : "REPLY"}
             </button>
         </article>
     );

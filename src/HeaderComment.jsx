@@ -1,4 +1,7 @@
-export function HeaderComment({ img, date, name, currentUser }) {
+export function HeaderComment({ img, date, name, currentUser, id }) {
+    function responder() {
+        console.log(id);
+    }
     return (
         <header className="flex gap-4 items-center mb-5 justify-end">
             <img src={img} className="w-[32px]"></img>
@@ -17,8 +20,10 @@ export function HeaderComment({ img, date, name, currentUser }) {
                     </button>
                 ) : null
             ) : null}
-
-            <button className="hover:cursor-pointer flex gap-1 items-center text-moderate-blue font-bold">
+            <button
+                onClick={responder}
+                className="hover:cursor-pointer flex gap-1 items-center text-moderate-blue font-bold"
+            >
                 <img
                     className="w-[14px] h-[13px]"
                     src="images/icon-reply.svg"

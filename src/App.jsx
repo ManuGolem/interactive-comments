@@ -38,13 +38,14 @@ export function App() {
                     >
                         <Comentario
                             key={comentario.id}
+                            id={comentario.id}
                             img={comentario.user.image.webp}
                             name={comentario.user.username}
                             date={comentario.createdAt}
                             text={comentario.content}
                             tipo="Comentario"
                             score={comentario.score}
-                            currentUser={user ? user.username : null}
+                            currentUser={user ? user : null}
                         />
                         <div className="respuesta">
                             <div className="respuesta-sep">
@@ -67,6 +68,7 @@ export function App() {
         return (
             <Comentario
                 key={comentario.id}
+                id={comentario.id}
                 img={comentario.user.image.webp}
                 name={comentario.user.username}
                 date={comentario.createdAt}
@@ -74,7 +76,7 @@ export function App() {
                 tipo={tipoComent}
                 responseTo={responseTo}
                 score={comentario.score}
-                currentUser={user ? user.username : null}
+                currentUser={user ? user : null}
             />
         );
     }
@@ -91,6 +93,7 @@ export function App() {
                         funcion={comentar}
                         img={user.image.webp}
                         name={user.username}
+                        send={true}
                     />
                 </div>
             ) : (
