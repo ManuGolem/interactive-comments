@@ -1,6 +1,13 @@
-export function HeaderComment({ img, date, name, currentUser, id }) {
+export function HeaderComment({
+    img,
+    date,
+    name,
+    currentUser,
+    id,
+    llamarFuncion,
+}) {
     function responder() {
-        console.log(id);
+        llamarFuncion();
     }
     return (
         <header className="flex gap-4 items-center mb-5 justify-end">

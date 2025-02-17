@@ -19,7 +19,7 @@ export function App() {
         const nuevoComentario = {
             id: id,
             content: value,
-            createdAt: "Recently",
+            createdAt: "Recentlyy",
             user: user,
             replies: [],
             score: 0,
@@ -46,6 +46,7 @@ export function App() {
                             tipo="Comentario"
                             score={comentario.score}
                             currentUser={user ? user : null}
+                            responder={responder}
                         />
                         <div className="respuesta">
                             <div className="respuesta-sep">
@@ -64,7 +65,6 @@ export function App() {
             tipoComent = "Respuesta";
             responseTo = "@".concat(comentario.replyingTo);
         }
-        console.log(comentario);
         return (
             <Comentario
                 key={comentario.id}
@@ -75,20 +75,64 @@ export function App() {
                 text={comentario.content}
                 tipo={tipoComent}
                 responseTo={responseTo}
+                responder={responder}
                 score={comentario.score}
                 currentUser={user ? user : null}
             />
         );
     }
+    function responder(value, idViejo) {
+        const copiaComentarios = JSON.parse(JSON.stringify(comentarios));
+        buscarComentarioId(idViejo, copiaComentarios, value);
+        setComentarios(copiaComentarios);
+    }
+    function buscarComentarioId(idViejo, arreglo, value) {
+        if (Array.isArray(arreglo)) {
+            for (const co of arreglo) {
+                if (co.id == idViejo) {
+                    const nuevoComentario = {
+                        id: id,
+                        content: value,
+                        createdAt: "Recently",
+                        user: user,
+                        replies: [],
+                        score: 0,
+                        replyingTo: co.user.username,
+                    };
+                    setId(id + 1);
+                    if (!co.replies) {
+                        co.replies = [];
+                    }
+                    return co.replies.push(nuevoComentario);
+                } else if (co.replies) {
+                    if (co.replies.length > 0) {
+                        buscarComentarioId(idViejo, co.replies, value);
+                    }
+                }
+            }
+        } else if (arreglo.id == idViejo) {
+            const nuevoComentario = {
+                id: id,
+                content: value,
+                createdAt: "Recently",
+                user: user,
+                replies: [],
+                score: 0,
+                replyingTo: arreglo.user.username,
+            };
+            setId(id + 1);
+            arreglo.replies.push(nuevoComentario);
+        }
+    }
     return (
-        <section className="mt-12 flex flex-col gap-2">
+        <section className="mt-12 flex flex-col gap-2 w-[50%] mr-auto ml-auto">
             {comentarios.length > 0 ? (
                 comentarios.map((comentario) => devolverArbol(comentario))
             ) : (
                 <p>No hay comentarios Disponibles</p>
             )}
             {user ? (
-                <div className="w-[50%] mr-auto ml-auto">
+                <div>
                     <Comentar
                         funcion={comentar}
                         img={user.image.webp}
