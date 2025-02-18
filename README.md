@@ -30,11 +30,11 @@ Users should be able to:
 
 - Desktop :
 
-![Img desktop]()
+![Img desktop](/public/images/interactive-comments-desktop.png)
 
 - Mobile:
 
-![Img Mobile]()
+![Img Mobile](/public/images/interactive-comments-mobile.png)
 
 ### Links
 
