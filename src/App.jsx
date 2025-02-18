@@ -5,6 +5,7 @@ export function App() {
     const [comentarios, setComentarios] = useState([]);
     const [user, setUser] = useState(null);
     const [id, setId] = useState(5);
+    const [idBorrar, setIdBorrar] = useState(-1);
     async function traerDatos() {
         const data = await fetch("data.json").then((response) =>
             response.json(),
@@ -38,7 +39,7 @@ export function App() {
                     >
                         <Comentario
                             key={comentario.id}
-                            borrarComentario={borrar}
+                            borrarComentario={abrirDialog}
                             id={comentario.id}
                             img={comentario.user.image.webp}
                             name={comentario.user.username}
@@ -72,7 +73,7 @@ export function App() {
             <Comentario
                 key={comentario.id}
                 id={comentario.id}
-                borrarComentario={borrar}
+                borrarComentario={abrirDialog}
                 img={comentario.user.image.webp}
                 name={comentario.user.username}
                 date={comentario.createdAt}
@@ -127,9 +128,9 @@ export function App() {
             arreglo.replies.push(nuevoComentario);
         }
     }
-    function borrar(idABorrar) {
+    function borrar() {
         const copiaComentarios = JSON.parse(JSON.stringify(comentarios));
-        borrarComentarioId(idABorrar, copiaComentarios);
+        borrarComentarioId(idBorrar, copiaComentarios);
         setComentarios(copiaComentarios);
     }
     function borrarComentarioId(idS, arreglo) {
@@ -145,6 +146,10 @@ export function App() {
                 }
             }
         }
+    }
+    function abrirDialog(idABorrar) {
+        document.querySelector("dialog").showModal();
+        setIdBorrar(idABorrar);
     }
     return (
         <section className="mt-12 flex flex-col gap-2 w-[50%] mr-auto ml-auto">
@@ -165,6 +170,32 @@ export function App() {
             ) : (
                 <p> No hay user aun</p>
             )}
+
+            <dialog className="absolute top-0 left-0 right-0 bottom-0 p-5 m-auto w-[22%] rounded-[8px] backdrop:bg-[rgba(0,0,0,0.6)]">
+                <h1 className="text-[20px] font-bold text-start mb-5">
+                    Delete comment
+                </h1>
+                <p className="text-grayish-blue text-start text-[16px] mb-5">
+                    Are you sure you want to delete this comment? This will
+                    remove the comment and can't be undonde.
+                </p>
+                <div>
+                    <form
+                        method="dialog"
+                        className="flex gap-5 justify-center mt-2"
+                    >
+                        <button className="bg-grayish-blue px-5 py-2 text-white font-bold rounded-[8px] hover:cursor-pointer hover:scale-[1.1]">
+                            NO, CANCEL
+                        </button>
+                        <button
+                            onClick={borrar}
+                            className="bg-soft-red px-5 py-2 text-white font-bold rounded-[8px] hover:cursor-pointer hover:scale-[1.1]"
+                        >
+                            YES, DELETE
+                        </button>
+                    </form>
+                </div>
+            </dialog>
         </section>
     );
 }
