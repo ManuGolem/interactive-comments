@@ -193,7 +193,7 @@ export function App() {
                 <p> No hay user aun</p>
             )}
 
-            <dialog className="absolute top-0 left-0 right-0 bottom-0 p-5 m-auto w-[22%] rounded-[8px] backdrop:bg-[rgba(0,0,0,0.6)]">
+            <dialog className="absolute top-0 left-0 right-0 bottom-0 p-5 m-auto md:w-[22%] rounded-[8px] backdrop:bg-[rgba(0,0,0,0.6)]">
                 <h1 className="text-[20px] font-bold text-start mb-5">
                     Delete comment
                 </h1>
