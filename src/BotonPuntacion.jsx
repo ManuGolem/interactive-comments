@@ -30,11 +30,13 @@ export function BotonPuntuacion({ score }) {
         }
     }
     return (
-        <div className="bg-light-gray flex flex-col justify-center rounded-[8px] px-2 gap-1.5 row-start-2 ">
+        <div className=" bg-light-gray flex md:flex-col rounded-[8px] px-2 gap-4 md:gap-1.5 md:col-start-1 md:row-start-1 md:row-end-[-1] h-full">
             <button onClick={like} className={clasesBotones.concat(meGusta)}>
                 +
             </button>
-            <p className="text-center text-moderate-blue font-bold">{likes}</p>
+            <p className="text-center text-moderate-blue font-bold mt-auto mb-auto">
+                {likes}
+            </p>
             <button
                 onClick={dontLike}
                 className={clasesBotones.concat(noMegusta)}
