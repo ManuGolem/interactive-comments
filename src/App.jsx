@@ -48,6 +48,7 @@ export function App() {
                             score={comentario.score}
                             currentUser={user ? user : null}
                             responder={responder}
+                            editarComentario={editarComentario}
                             responseTo={
                                 comentario.replyingTo &&
                                 "@".concat(comentario.replyingTo)
@@ -80,6 +81,7 @@ export function App() {
                 text={comentario.content}
                 responseTo={responseTo}
                 responder={responder}
+                editarComentario={editarComentario}
                 score={comentario.score}
                 currentUser={user ? user : null}
             />
@@ -150,6 +152,26 @@ export function App() {
     function abrirDialog(idABorrar) {
         document.querySelector("dialog").showModal();
         setIdBorrar(idABorrar);
+    }
+    function editarComentario(textoEditar, idEditar) {
+        const copiaComentarios = JSON.parse(JSON.stringify(comentarios));
+        editarId(idEditar, copiaComentarios, textoEditar);
+        setComentarios(copiaComentarios);
+    }
+    function editarId(idE, arreglo, value) {
+        if (Array.isArray(arreglo)) {
+            for (const co of arreglo) {
+                if (co.id == idE) {
+                    co.content = value;
+                } else if (co.replies) {
+                    if (co.replies.length > 0) {
+                        editarId(idE, co.replies, value);
+                    }
+                }
+            }
+        } else if (arreglo.id == idViejo) {
+            arreglo.content = value;
+        }
     }
     return (
         <section className="mt-12 flex flex-col gap-2 w-[50%] mr-auto ml-auto">

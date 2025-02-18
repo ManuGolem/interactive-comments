@@ -5,12 +5,16 @@ export function HeaderComment({
     currentUser,
     llamarBorrar,
     llamarFuncion,
+    llamarEditar,
 }) {
     function borrar() {
         llamarBorrar();
     }
     function responder() {
         llamarFuncion();
+    }
+    function editar() {
+        llamarEditar();
     }
     return (
         <header className="flex gap-4 items-center mb-5 justify-end">
@@ -24,13 +28,21 @@ export function HeaderComment({
             <p className="text-grayish-blue text-start grow">{date}</p>
             {currentUser != null ? (
                 currentUser == name ? (
-                    <button
-                        onClick={borrar}
-                        className=" text-soft-red flex gap-1 items-center hover:cursor-pointer"
-                    >
-                        <img src="images/icon-delete.svg" />
-                        Delete
-                    </button>
+                    <>
+                        <button
+                            onClick={borrar}
+                            className="font-bold text-soft-red flex gap-1 items-center hover:cursor-pointer"
+                        >
+                            <img src="images/icon-delete.svg" />
+                            Delete
+                        </button>
+                        <button
+                            onClick={editar}
+                            className="font-bold text-moderate-blue flex gap-1 items-center hover:cursor-pointer"
+                        >
+                            <img src="images/icon-edit.svg" /> Edit
+                        </button>
+                    </>
                 ) : null
             ) : null}
             <button

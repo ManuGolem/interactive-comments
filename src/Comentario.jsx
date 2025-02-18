@@ -13,19 +13,31 @@ export function Comentario({
     id,
     responder,
     borrarComentario,
+    editarComentario,
 }) {
     const [respondiendo, setRespondiendo] = useState(false);
+    const [value, setValue] = useState("");
+    const [tipoSend, setTipoSend] = useState(0);
     function handleResponder() {
         setRespondiendo(true);
     }
     function enviar(texto) {
         if (texto != "") {
-            responder(texto, id);
+            if (tipoSend == 0) {
+                responder(texto, id);
+            } else {
+                editarComentario(texto, id);
+            }
         }
         setRespondiendo(false);
     }
     function borrar() {
         borrarComentario(id);
+    }
+    function handleEditar() {
+        handleResponder();
+        setValue(text);
+        setTipoSend(-1);
     }
     return (
         <>
@@ -43,6 +55,7 @@ export function Comentario({
                         date={date}
                         id={id}
                         llamarFuncion={handleResponder}
+                        llamarEditar={handleEditar}
                     />
                     <p className="text-grayish-blue text-start">
                         <strong className="text-moderate-blue font-bold">
@@ -58,7 +71,8 @@ export function Comentario({
                         funcion={enviar}
                         img={currentUser.image.webp}
                         name={currentUser.username}
-                        send={false}
+                        send={tipoSend}
+                        value={value}
                     />
                 </div>
             )}
