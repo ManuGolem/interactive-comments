@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BotonPuntuacion } from "./BotonPuntacion";
 import { HeaderComment } from "./HeaderComment";
 import { Comentar } from "./Comentar";
+import { Botones } from "./Botones";
 export function Comentario({
     img,
     name,
@@ -42,28 +43,32 @@ export function Comentario({
     return (
         <>
             <div
-                className="w-full bg-white p-5 gap-5 rounded-[8px] md:flex grid grid-cols-2 grid-rows-2"
+                className="w-full bg-white p-5 gap-5 rounded-[8px] contComent"
                 id={id}
             >
                 <BotonPuntuacion score={score} />
-                <div className="w-full col-start-1 col-end-3">
-                    <HeaderComment
-                        llamarBorrar={borrar}
-                        img={img}
-                        name={name}
-                        currentUser={currentUser ? currentUser.username : null}
-                        date={date}
-                        id={id}
-                        llamarFuncion={handleResponder}
-                        llamarEditar={handleEditar}
-                    />
-                    <p className="text-grayish-blue text-start">
-                        <strong className="text-moderate-blue font-bold">
-                            {responseTo}
-                        </strong>{" "}
-                        {text}
-                    </p>
-                </div>
+
+                <HeaderComment
+                    img={img}
+                    name={name}
+                    currentUser={currentUser ? currentUser.username : null}
+                    date={date}
+                    id={id}
+                />
+                <p className="text-grayish-blue text-start md:col-start-2 md:col-end-[-1] col-start-1 col-end-[-1] row-start-2">
+                    <strong className="text-moderate-blue font-bold">
+                        {responseTo}
+                    </strong>{" "}
+                    {text}
+                </p>
+
+                <Botones
+                    llamarFuncion={handleResponder}
+                    llamarEditar={handleEditar}
+                    llamarBorrar={borrar}
+                    name={name}
+                    currentUser={currentUser ? currentUser.username : null}
+                />
             </div>
             {respondiendo && (
                 <div className="w-full mr-auto ml-auto">
