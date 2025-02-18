@@ -174,7 +174,7 @@ export function App() {
         }
     }
     return (
-        <section className="mt-12 flex flex-col gap-2 w-[50%] mr-auto ml-auto">
+        <section className="w-full text-[14px] mt-8 flex flex-col gap-2 md:w-[50%] md:text-[16px] mr-auto ml-auto">
             {comentarios.length > 0 ? (
                 comentarios.map((comentario) => devolverArbol(comentario))
             ) : (

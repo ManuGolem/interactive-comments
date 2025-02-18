@@ -42,11 +42,11 @@ export function Comentario({
     return (
         <>
             <div
-                className="w-full flex bg-white p-5 gap-5 rounded-[8px]"
+                className="w-full bg-white p-5 gap-5 rounded-[8px] md:flex grid grid-cols-2 grid-rows-2"
                 id={id}
             >
                 <BotonPuntuacion score={score} />
-                <div className="w-full">
+                <div className="w-full col-start-1 col-end-3">
                     <HeaderComment
                         llamarBorrar={borrar}
                         img={img}

@@ -30,7 +30,7 @@ export function BotonPuntuacion({ score }) {
         }
     }
     return (
-        <div className="bg-light-gray flex flex-col justify-center rounded-[8px] px-2 gap-1.5">
+        <div className="bg-light-gray flex flex-col justify-center rounded-[8px] px-2 gap-1.5 row-start-2 ">
             <button onClick={like} className={clasesBotones.concat(meGusta)}>
                 +
             </button>
